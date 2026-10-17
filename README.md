@@ -98,10 +98,29 @@ The NGINX container returned to the `Up` state, and an HTTP request to `http://l
 
 **Result:** The end-to-end alert-to-recovery workflow was successfully tested in the local Docker environment.
 
-## 8. Conclusion
+## 8. Day 2: Monitoring and Alerting Improvements
+
+### Additional Alert Rules
+
+The Prometheus alert configuration was extended with three rules:
+
+- `NginxTargetDown` — detects when the NGINX availability metric is zero.
+- `NginxExporterDown` — detects when Prometheus cannot scrape the NGINX exporter.
+- `PrometheusTargetDown` — detects when Prometheus cannot scrape its own metrics endpoint.
+
+### Exporter Failure and Recovery Test
+
+The NGINX exporter was temporarily stopped to simulate a monitoring-target failure. Prometheus successfully triggered the `NginxExporterDown` alert with warning severity.
+
+The exporter was then started again. Both the NGINX exporter target and Prometheus target returned to the `up` state, and the Prometheus alerts API returned an empty active-alert list.
+
+**Result:** The additional exporter-down alert was verified, and normal monitoring was restored after the exporter restarted.
+
+
+## 9. Conclusion
 
 This project demonstrates how monitoring, alerting, webhook automation, and configuration management can be integrated to recover a failed service automatically. It provides a local demonstration of self-healing infrastructure and can be extended with additional health checks, notification channels, and recovery policies.
 
-## 9. Important Note
+## 10. Important Note
 
 This is a local learning project, not a production-ready deployment. The webhook container has access to the Docker socket, which grants powerful control over the Docker host. Production deployments require appropriate access restrictions, authentication, and a production-grade web server.
