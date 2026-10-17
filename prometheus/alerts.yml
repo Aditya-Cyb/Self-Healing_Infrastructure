@@ -3,13 +3,13 @@ groups:
   - name: infrastructure-alerts
     rules:
       - alert: NginxTargetDown
-        expr: nginx_up == 0
+        expr: nginx_up == 0 or absent(nginx_up)
         for: 10s
         labels:
           severity: critical
         annotations:
           summary: "NGINX service is down"
-          description: "The NGINX exporter reports that NGINX is unavailable."
+          description: "NGINX is unavailable or its availability metric is missing."
 
       - alert: NginxExporterDown
         expr: up{job="nginx"} == 0
