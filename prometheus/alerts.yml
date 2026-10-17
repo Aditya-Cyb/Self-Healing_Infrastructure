@@ -1,0 +1,11 @@
+groups:
+  - name: infrastructure-alerts
+    rules:
+      - alert: NginxTargetDown
+        expr: nginx_up == 0
+        for: 10s
+        labels:
+          severity: critical
+        annotations:
+          summary: "NGINX service is down"
+          description: "The NGINX exporter reports that NGINX is unavailable."

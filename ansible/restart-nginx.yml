@@ -1,0 +1,15 @@
+---
+- name: Recover NGINX container
+  hosts: localhost
+  connection: local
+  gather_facts: false
+
+  tasks:
+    - name: Restart NGINX containers
+      ansible.builtin.command:
+        argv:
+          - docker
+          - restart
+          - self-healing-nginx
+      register: restart_result
+      changed_when: restart_result.rc == 0
