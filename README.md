@@ -124,3 +124,25 @@ This project demonstrates how monitoring, alerting, webhook automation, and conf
 ## 10. Important Note
 
 This is a local learning project, not a production-ready deployment. The webhook container has access to the Docker socket, which grants powerful control over the Docker host. Production deployments require appropriate access restrictions, authentication, and a production-grade web server.
+
+## 11. Day 3: End-to-End Recovery Verification
+
+### Objective
+Verify the alert-to-recovery workflow using Prometheus, Alertmanager, a Flask webhook, and Ansible.
+
+### Verification Steps
+1. Checked that all Docker Compose services were running.
+2. Updated the `NginxTargetDown` alert rule to detect a zero or missing `nginx_up` metric.
+3. Verified that the webhook received the `NginxTargetDown` alert from Alertmanager.
+4. Confirmed that the webhook executed the Ansible recovery playbook.
+5. Checked the Ansible recap: `ok=1`, `changed=1`, `failed=0`.
+6. Verified that NGINX was running and returned `HTTP/1.1 200 OK`.
+
+### Result
+The webhook notification and Ansible recovery playbook executed successfully. NGINX was healthy after the recovery workflow.
+
+**Note:** The NGINX container uses Docker's `unless-stopped` restart policy. The collected evidence confirms successful webhook/Ansible execution and post-recovery health, but does not independently prove that Ansible alone caused the container restart.
+
+### Evidence
+- `screenshots/day3-automatic-recovery-logs.png`
+- `screenshots/day3-recovery-verified.png`
