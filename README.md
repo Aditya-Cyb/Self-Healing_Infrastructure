@@ -168,5 +168,7 @@ The alert notification reached the webhook, the Ansible recovery playbook execut
 **Limitation:** The collected logs establish successful alert delivery, Ansible execution, and post-recovery health. They do not independently establish that Ansible was the sole cause of the container restart.
 
 ### Evidence
-- `screenshots/day3-automatic-recovery-logs.png`
-- `screenshots/day3-recovery-verified.png`
+### Evidence
+- [Prometheus Alert Rules](screenshots/day4-prometheus-alert-rules.png)
+- [Webhook and Ansible Recovery Logs](screenshots/day4-recovery-logs.png)
+- [NGINX Recovery Verification](screenshots/day4-nginx-recovery-verified.png)
