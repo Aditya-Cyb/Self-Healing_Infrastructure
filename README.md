@@ -195,3 +195,31 @@ The webhook received the alert, the Ansible recovery playbook executed successfu
 ### Evidence
 - `screenshots/day5-recovery-logs.png`
 - `screenshots/day5-nginx-health-check.png`
+
+## 14. Day 6: Fresh Self-Healing Verification
+
+### Objective
+Re-verify the local self-healing workflow using Prometheus, Alertmanager, the Flask webhook, Ansible, and Docker.
+
+### Verification Results
+1. Confirmed that all five Docker Compose containers were running before the test.
+2. Verified that the Prometheus NGINX exporter and Prometheus targets were `UP`.
+3. Confirmed that all three Prometheus alert rules were loaded and inactive before the test.
+4. Verified that Alertmanager was ready and NGINX initially returned HTTP 200.
+5. Stopped the `self-healing-nginx` container to simulate a service failure.
+6. Verified webhook logs showing receipt of the `NginxTargetDown` alert from Alertmanager.
+7. Confirmed that the webhook executed the Ansible recovery playbook successfully.
+8. Verified the Ansible recap: `ok=1`, `changed=1`, `failed=0`.
+9. Confirmed that NGINX returned HTTP 200 after the recovery workflow.
+10. Verified that the NGINX restart policy was `unless-stopped`.
+
+### Result
+The fresh verification showed successful alert delivery to the webhook, successful Ansible playbook execution, and a successful HTTP response from NGINX after the recovery workflow.
+
+**Limitation:** Docker events showed the NGINX container stopping and starting, but the available evidence does not independently establish that Ansible was the sole cause of the restart. The configured Docker restart policy may also affect container recovery.
+
+### Evidence
+- [Prometheus Targets](screenshots/day6-prometheus-targets.png)
+- [Prometheus Alert Rules](screenshots/day6-prometheus-alert-rules.png)
+- [Auto-Healing Logs](screenshots/day6-auto-healing-logs.png)
+- [NGINX Health Check](screenshots/day6-nginx-health-check.png)
