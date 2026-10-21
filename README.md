@@ -117,15 +117,8 @@ The exporter was then started again. Both the NGINX exporter target and Promethe
 **Result:** The additional exporter-down alert was verified, and normal monitoring was restored after the exporter restarted.
 
 
-## 9. Conclusion
 
-This project demonstrates how monitoring, alerting, webhook automation, and configuration management can be integrated to recover a failed service automatically. It provides a local demonstration of self-healing infrastructure and can be extended with additional health checks, notification channels, and recovery policies.
-
-## 10. Important Note
-
-This is a local learning project, not a production-ready deployment. The webhook container has access to the Docker socket, which grants powerful control over the Docker host. Production deployments require appropriate access restrictions, authentication, and a production-grade web server.
-
-## 11. Day 3: End-to-End Recovery Verification
+## 9. Day 3: End-to-End Recovery Verification
 
 ### Objective
 Verify the alert-to-recovery workflow using Prometheus, Alertmanager, a Flask webhook, and Ansible.
@@ -147,7 +140,7 @@ The webhook notification and Ansible recovery playbook executed successfully. NG
 - `screenshots/day3-automatic-recovery-logs.png`
 - `screenshots/day3-recovery-verified.png`
 
-## 12. Day 4: Controlled Self-Healing Recovery Verification
+## 10. Day 4: Controlled Self-Healing Recovery Verification
 
 ### Objective
 Verify the alert-driven recovery workflow using Prometheus, Alertmanager, a Flask webhook, Ansible, and Docker.
@@ -173,7 +166,7 @@ The alert notification reached the webhook, the Ansible recovery playbook execut
 - [Webhook and Ansible Recovery Logs](screenshots/day4-recovery-logs.png)
 - [NGINX Recovery Verification](screenshots/day4-nginx-recovery-verified.png)
 
-## 13. Day 5: Controlled Auto-Healing Verification
+## 11. Day 5: Controlled Auto-Healing Verification
 
 ### Objective
 Verify the self-healing workflow using Prometheus, Alertmanager, a Flask webhook, Ansible, and Docker.
@@ -196,7 +189,7 @@ The webhook received the alert, the Ansible recovery playbook executed successfu
 - `screenshots/day5-recovery-logs.png`
 - `screenshots/day5-nginx-health-check.png`
 
-## 14. Day 6: Fresh Self-Healing Verification
+## 12. Day 6: Fresh Self-Healing Verification
 
 ### Objective
 Re-verify the local self-healing workflow using Prometheus, Alertmanager, the Flask webhook, Ansible, and Docker.
@@ -223,3 +216,11 @@ The fresh verification showed successful alert delivery to the webhook, successf
 - [Prometheus Alert Rules](screenshots/day6-prometheus-alert-rules.png)
 - [Auto-Healing Logs](screenshots/day6-auto-healing-logs.png)
 - [NGINX Health Check](screenshots/day6-nginx-health-check.png)
+
+## 13. Conclusion
+
+This project demonstrates how monitoring, alerting, webhook automation, and configuration management can be integrated to recover a failed service automatically. It provides a local demonstration of self-healing infrastructure and can be extended with additional health checks, notification channels, and recovery policies.
+
+## 14. Important Note
+
+This is a local learning project, not a production-ready deployment. The webhook container has access to the Docker socket, which grants powerful control over the Docker host. Production deployments require appropriate access restrictions, authentication, and a production-grade web server.
